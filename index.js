@@ -24,12 +24,14 @@ async function run() {
 
     const coffeeCollection = client.db("coffeeDB").collection("coffee");
 
+    // get all coffee
     app.get("/coffee", async (req, res) => {
       const cursor = coffeeCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
 
+    // get single cofffe by id
     app.get("/coffee/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -37,6 +39,7 @@ async function run() {
       res.send(result);
     });
 
+    // post all coffee from client side
     app.post("/coffee", async (req, res) => {
       const newCoffee = req.body;
       console.log(newCoffee);
@@ -44,9 +47,11 @@ async function run() {
       res.send(result);
     });
 
+    // update single coffe details by id
     app.put("/coffee/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
+      //  Set the upsert option to insert a document if no documents match the filter
       const options = { upsert: true };
       const updatedCoffee = req.body;
       const coffee = {
@@ -64,6 +69,7 @@ async function run() {
       res.send(result);
     });
 
+    // delete single coffee by id
     app.delete("/coffee/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
