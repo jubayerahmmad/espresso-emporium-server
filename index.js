@@ -42,7 +42,7 @@ async function run() {
     // post all coffee from client side
     app.post("/coffee", async (req, res) => {
       const newCoffee = req.body;
-      console.log(newCoffee);
+      // console.log(newCoffee);
       const result = await coffeeCollection.insertOne(newCoffee);
       res.send(result);
     });
