@@ -91,7 +91,6 @@ async function run() {
 run().catch(console.dir);
 
 // middleware
-
 app.use(cors());
 app.use(express.json());
 
